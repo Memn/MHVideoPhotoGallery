@@ -380,23 +380,25 @@
 }
 
 -(void)sharePressed{
-    if (self.UICustomization.showMHShareViewInsteadOfActivityViewController) {
+    /*if (self.UICustomization.showMHShareViewInsteadOfActivityViewController) {
         MHShareViewController *share = [MHShareViewController new];
         share.pageIndex = self.pageIndex;
         share.galleryItems = self.galleryItems;
         [self.navigationController pushViewController:share
                                              animated:YES];
-    }else{
+    }else{*/
         MHImageViewController *imageViewController = (MHImageViewController*)self.pageViewController.viewControllers.firstObject;
         if (imageViewController.imageView.image != nil) {
-            UIActivityViewController *act = [UIActivityViewController.alloc initWithActivityItems:@[imageViewController.imageView.image] applicationActivities:nil];
+            
+            UIActivityViewController *act = [UIActivityViewController.alloc initWithActivityItems:@[imageViewController.imageView.image, @""] applicationActivities:nil];
+            
             [self presentViewController:act animated:YES completion:nil];
             
             if ([act respondsToSelector:@selector(popoverPresentationController)]) {
                 act.popoverPresentationController.barButtonItem = self.shareBarButton;
             }
         }        
-    }
+    //}
 }
 
 -(void)updateTitleLabelForIndex:(NSInteger)index{
